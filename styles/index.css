@@ -24,16 +24,17 @@
     display: flex;
     margin-bottom: 20px;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 #filters label {
-    margin: 10px;
-
+    margin: 20px;
 }
 
 #filters button {
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 #main label {
