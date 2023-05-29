@@ -5,13 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/exercise.css">
-    <title>Gym Coach</title>
+    <title>Exercise Details</title>
 </head>
 
-<body id="secondary-page">
-    <h1 id="main-label"></h1>
-    <p id="description"></p>
-    <p id="link"></p>
+<body style="background-image: url('background.jpg');">
+    <div class="exercise-container">
+        <h1 id="exercise-name">Exercise Name</h1>
+        <div class="exercise-info">
+            <p id="type"><strong>Type:</strong> <span id="type-value"></span></p>
+            <p id="part"><strong>Body Part:</strong> <span id="part-value"></span></p>
+            <p id="equipment"><strong>Equipment Needed:</strong> <span id="equipment-value"></span></p>
+            <p id="level"><strong>Difficulty Level:</strong> <span id="level-value"></span></p>
+            <p id="rating"><strong>Rating:</strong> <span id="rating-value"></span></p>
+        </div>
+        <div class="exercise-description">
+            <h2>Description</h2>
+            <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis quam a dui pharetra malesuada. Proin eu lorem vel elit ultrices ultricies. Suspendisse non maximus metus. Mauris semper dui vel diam venenatis, at tincidunt est rhoncus. Nunc at est et neque facilisis congue. Vivamus eleifend fringilla sapien, vel pellentesque leo accumsan et.</p>
+        </div>
+        <div class="video-container">
+            <h2>Video Tutorial</h2>
+            <iframe id="player" width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
     <script src="script/exercise.js"></script>
 </body>
 

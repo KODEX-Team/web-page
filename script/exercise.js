@@ -24,13 +24,19 @@ fetch('GymDataset.csv')
     });
 
 function showExercise(data) {
-    document.getElementById('main-label').innerHTML = data.title;
-    document.getElementById('description').innerHTML = data.description;
-    document.getElementById('link').innerHTML = data.link;
-    let player = document.createElement("iframe");
-    player.id = "player";
-    player.title = "YouTube video player";
-    player.src = data.link;
-    let elem = document.getElementById("secondary-page")
-    elem.appendChild(player);
+    document.getElementById('exercise-name').textContent = data.title;
+    document.getElementById('type-value').textContent = data.type;
+    document.getElementById('part-value').textContent = data.bodyPart;
+    document.getElementById('equipment-value').textContent = data.equipment;
+    document.getElementById('level-value').textContent = data.level;
+    document.getElementById('rating-value').textContent = data.rating;
+    document.getElementById('description').textContent = data.description;
+    const youtubeUrl = data.link;
+    const videoId = getYouTubeVideoId(youtubeUrl);
+    document.getElementById('player').src = "https://www.youtube.com/embed/" + videoId;
 }
+
+function getYouTubeVideoId(url) {
+    const urlParams = new URLSearchParams(new URL(url).search);
+    return urlParams.get('v');
+}  

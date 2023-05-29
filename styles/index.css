@@ -23,18 +23,21 @@
 #filters {
     display: flex;
     margin-bottom: 20px;
-    background-color: #333;
     align-items: center;
     justify-content: center;
 }
 
 #filters label {
-    margin-right: 10px;
+    margin: 10px;
+
+}
+
+#filters button {
+    margin-left: 10px;
 }
 
 #main label {
     text-align: center;
-    background-color: #333;
 
 }
 
@@ -43,7 +46,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #333;
 
 }
 

@@ -1,4 +1,51 @@
-#player {
-    width: 560;
-    height: 315;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: white;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.exercise-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.exercise-name {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.exercise-info {
+    margin-bottom: 20px;
+}
+
+.exercise-info p {
+    margin: 5px 0;
+}
+
+.exercise-description {
+    margin-bottom: 20px;
+}
+
+.exercise-description h2 {
+    margin-bottom: 10px;
+}
+
+.video-container {
+    text-align: center;
+}
+
+.video-container h2 {
+    margin-bottom: 10px;
+}
+
+.video-container iframe {
+    max-width: 100%;
 }
