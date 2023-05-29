@@ -8,10 +8,10 @@
     <title>Gym Coach</title>
 </head>
 
-<body id="main-page">
-    <h1>Exercise List</h1>
+<body id="main-page" style="background-image: url('background.jpg');">
+    <h1 class="labels">Gym Coach</h1>
+    <h2 class="labels">Filters</h2>
     <div id="filters">
-        <h2>Filters</h2>
         <label for="type-filter">Type of exercise part:</label>
         <select id="type-filter">
             <option value="">All</option>
@@ -65,13 +65,27 @@
 
         <button onclick="filterExercises('type-filter', 'body-part-filter', 'equipment-filter', 'level-filter')">Search</button>
     </div>
-    <h2 id="main label">Exercises</h2>
-    <div id="exercise-list">
+    
+    <div>
+        <h2 class="labels">Exercises</h2>
     </div>
-    <div id="page-button">
-        <button onclick="loadExercise(pageSize, 'previous')"><</button>
-        <button onclick="loadExercise(pageSize)">></button>
-    </div>
+    <main>
+        <div id="table-header">
+            <h3 class="labels">Title</h3>
+            <div class="ending">
+                <p class="labels">Level</p>
+                <p class="labels">Rating</p>
+            </div>
+        </div>
+        <div id="exercise-list">
+        </div>
+        
+        <div id="page-button">
+            <button onclick="loadExercise(pageSize, 'previous')"><</button>
+            <button onclick="loadExercise(pageSize)">></button>
+        </div>
+    </main>
+
     <script src="script/script.js"></script>
 </body>
 

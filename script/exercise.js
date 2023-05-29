@@ -27,4 +27,10 @@ function showExercise(data) {
     document.getElementById('main-label').innerHTML = data.title;
     document.getElementById('description').innerHTML = data.description;
     document.getElementById('link').innerHTML = data.link;
+    let player = document.createElement("iframe");
+    player.id = "player";
+    player.title = "YouTube video player";
+    player.src = data.link;
+    let elem = document.getElementById("secondary-page")
+    elem.appendChild(player);
 }

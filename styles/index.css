@@ -3,39 +3,61 @@
 }
 
 #main-page {
-    font-family: Arial, sans-serif;
+    color:white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
     padding: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
 
-h1,
-h2 {
-    color: #333;
+.labels {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #filters {
+    display: flex;
     margin-bottom: 20px;
+    background-color: #333;
+    align-items: center;
+    justify-content: center;
 }
 
 #filters label {
     margin-right: 10px;
 }
 
-#exercise-table-body tr:hover {
-    background-color: #f0f0f0;
-}
-
 #main label {
     text-align: center;
+    background-color: #333;
+
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+
+}
+
+#table-header {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 10px;
+    align-items: center;
 }
 
 #exercise-list {
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +66,7 @@ h2 {
 .exercise-elem {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 100%;
     margin-bottom: 10px;
     padding: 10px;
     align-items: center;
@@ -63,5 +85,5 @@ h2 {
 }
 
 .ending > p {
-    margin-left: 10px;
+    margin: 15px;
 }
