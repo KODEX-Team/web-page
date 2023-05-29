@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+#main-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1,
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#filters {
+    margin-bottom: 20px;
+}
+
+#filters label {
+    margin-right: 10px;
+}
+
+#exercise-table-body tr:hover {
+    background-color: #f0f0f0;
+}
+
+#main label {
+    text-align: center;
+}
+
+#exercise-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exercise-elem {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
+
+.exercise-elem:hover {
+    background-color: gray;
+}
+
+.ending {
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+}
+
+.ending > p {
+    margin-left: 10px;
+}
