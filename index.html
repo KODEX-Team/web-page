@@ -8,69 +8,127 @@
     <title>Gym Coach</title>
 </head>
 
+<script>
+    function onOpenCvReady() {
+        document.getElementById('status').innerHTML = 'OpenCV.js status: Ready.';
+        let imgElement = document.getElementById('imageSrc');
+        let inputElement = document.getElementById('fileInput');
+        inputElement.addEventListener('change', (e) => {
+            imgElement.src = URL.createObjectURL(e.target.files[0]);
+        }, false);
+        imgElement.onload = function () {
+            // Convert readedImage to ndarray
+            let imageMat = new cv.Mat();
+            cv.cvtColor(cv.imread(imgElement), imageMat, cv.COLOR_BGR2RGB);
+
+            // Calculate the minimum dimension
+            let minDimension = Math.min(imageMat.cols, imageMat.rows);
+
+            // Crop the image
+            let croppedMat = imageMat.roi(new cv.Rect(Math.round((imageMat.cols - minDimension) / 2), Math.round((imageMat.rows - minDimension) / 2), minDimension, minDimension));
+
+            // Resize the cropped image to match the model's input shape
+            let resizedMat = new cv.Mat();
+            cv.resize(croppedMat, resizedMat, new cv.Size(32, 32), 0, 0, cv.INTER_AREA);
+
+            // Convert the image to RGB
+            let rgbMat = new cv.Mat();
+            cv.cvtColor(resizedMat, rgbMat, cv.COLOR_BGR2RGB);
+
+            // cv.imshow('canvasOutput', rgbMat);
+
+            // Get the pixel data as a one-dimensional array
+            let pixelData = new Uint8Array(rgbMat.data);
+
+            // Prepare the result array
+            let resultArray = [];
+
+            // Iterate over the pixel data and reshape it into a 32x32x3 array
+            for (let i = 0; i < rgbMat.cols * rgbMat.rows; ++i) {
+                if (i % rgbMat.cols === 0) {
+                    resultArray.push([]);
+                }
+                resultArray[resultArray.length - 1].push([pixelData[i * 3], pixelData[i * 3 + 1], pixelData[i * 3 + 2]]);
+            }
+
+            // todo: HERE NEED PUSH TO SERVER classify(resultArray)
+
+            // Clean up
+            imageMat.delete();
+            croppedMat.delete();
+            resizedMat.delete();
+        };
+    }
+</script>
+
 <body id="main-page" style="background-image: url('background.jpg');">
+    <p id="status">OpenCV.js status: Loading...</p>
+    <div>
+        <div class="row-align">
+            <img id="imageSrc" style="border: none; width: 150px;" />
+            <canvas id="canvasOutput" width="300"></canvas>
+        </div>
+
+        <input type="file" id="fileInput" name="file" accept="image/*" />
+    </div>
     <h1 class="labels">Gym Coach</h1>
     <h2 class="labels">Filters</h2>
     <div id="filters">
-        <div>
-            <label for="type-filter">Type of exercise part:</label>
-            <select id="type-filter">
-                <option value="">All</option>
-                <option value="Strength">Strength</option>
-                <option value="Plyometrics">Plyometrics</option>
-                <option value="Stretching">Stretching</option>
-                <option value="Powerlifting">Powerlifting</option>
-                <option value="Strongman">Strongman</option>
-                <option value="Cardio">Cardio</option>
-                <option value="Olympic Weightlifting">Olympic Weightlifting</option>
-            </select>
-        </div>
-        <div>
-            <label for="body-part-filter">Body part:</label>
-            <select id="body-part-filter">
-                <option value="">All</option>
-                <option value="Abdominals">Abdominals</option>
-                <option value="Adductors">Adductors</option>
-                <option value="Abductors">Abductors</option>
-                <option value="Biceps">Biceps</option>
-                <option value="Calves">Calves</option>
-                <option value="Chest">Chest</option>
-                <option value="Glutes">Glutes</option>
-                <option value="Triceps">Triceps</option>
-                <option value="Quadriceps">Quadriceps</option>
-                <option value="Shoulders">Shoulders</option>
-            </select>
-        </div>
-        <div>
-            <label for="equipment-filter">Equipment Needed:</label>
-            <select id="equipment-filter">
-                <option value="">All</option>
-                <option value="Dumbbell">Dumbbells</option>
-                <option value="Barbell">Barbell</option>
-                <option value="Kettlebells">Kettlebells</option>
-                <option value="Cable">Cable</option>
-                <option value="Machine">Machine</option>
-                <option value="Body Only">Body Only</option>
-                <option value="Medicine Ball">Medicine Ball</option>
-                <option value="Exercise Ball">Exercise Ball</option>
-                <option value="Bands">Bands</option>
-                <option value="Foam Roll">Foam Roll</option>
-                <option value="E-Z Curl Bar">E-Z Curl Bar</option>
-                <option value="Other">Other</option>
-            </select>    
-        </div>
-        <div>
-            <label for="level-filter">Training Level:</label>
-            <select id="level-filter">
-                <option value="">All</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Expert">Expert</option>
-            </select>
-        </div>
-        <button onclick="filterExercises('type-filter', 'body-part-filter', 'equipment-filter', 'level-filter')">Search</button>
+        <label for="type-filter">Type of exercise part:</label>
+        <select id="type-filter">
+            <option value="">All</option>
+            <option value="Strength">Strength</option>
+            <option value="Plyometrics">Plyometrics</option>
+            <option value="Stretching">Stretching</option>
+            <option value="Powerlifting">Powerlifting</option>
+            <option value="Strongman">Strongman</option>
+            <option value="Cardio">Cardio</option>
+            <option value="Olympic Weightlifting">Olympic Weightlifting</option>
+        </select>
+        <label for="body-part-filter">Body part:</label>
+        <select id="body-part-filter">
+            <option value="">All</option>
+            <option value="Abdominals">Abdominals</option>
+            <option value="Adductors">Adductors</option>
+            <option value="Abductors">Abductors</option>
+            <option value="Biceps">Biceps</option>
+            <option value="Calves">Calves</option>
+            <option value="Chest">Chest</option>
+            <option value="Glutes">Glutes</option>
+            <option value="Triceps">Triceps</option>
+            <option value="Quadriceps">Quadriceps</option>
+            <option value="Shoulders">Shoulders</option>
+        </select>
+
+        <label for="equipment-filter">Equipment Needed:</label>
+        <select id="equipment-filter">
+            <option value="">All</option>
+            <option value="Dumbbell">Dumbbells</option>
+            <option value="Barbell">Barbell</option>
+            <option value="Kettlebells">Kettlebells</option>
+            <option value="Cable">Cable</option>
+            <option value="Machine">Machine</option>
+            <option value="Body Only">Body Only</option>
+            <option value="Medicine Ball">Medicine Ball</option>
+            <option value="Exercise Ball">Exercise Ball</option>
+            <option value="Bands">Bands</option>
+            <option value="Foam Roll">Foam Roll</option>
+            <option value="E-Z Curl Bar">E-Z Curl Bar</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="level-filter">Training Level:</label>
+        <select id="level-filter">
+            <option value="">All</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+        </select>
+
+        <button
+            onclick="filterExercises('type-filter', 'body-part-filter', 'equipment-filter', 'level-filter')">Search</button>
     </div>
-    
+
     <div>
         <h2 class="labels">Exercises</h2>
     </div>
@@ -84,13 +142,15 @@
         </div>
         <div id="exercise-list">
         </div>
-        
+
         <div id="page-button">
-            <button onclick="loadExercise(pageSize, 'previous')"><</button>
-            <button onclick="loadExercise(pageSize)">></button>
+            <button onclick="loadExercise(pageSize, 'previous')"></button>
+            <button onclick="loadExercise(pageSize)"></button>
         </div>
     </main>
 
+    <script async src="https://docs.opencv.org/4.5.4/opencv.js" onload="onOpenCvReady();"
+        type="text/javascript"></script>
     <script src="script/script.js"></script>
 </body>
 
